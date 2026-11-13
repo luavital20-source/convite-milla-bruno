@@ -11,16 +11,18 @@
 <link rel="icon" type="image/png" href="midia/monograma-mb.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@200;300;400;500&family=Pinyon+Script&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@300;400;500&family=Pinyon+Script&display=swap" rel="stylesheet">
 <style>
   :root{
     --blue:#5F7896;        /* azul acinzentado (monograma) */
     --blue-deep:#465A72;   /* slate blue */
+    --night:#34465B;       /* faixa escura do versículo */
     --blue-soft:#B4C3D3;   /* french blue */
     --powder:#C9D5E1;      /* powder blue */
     --steel:#6E8297;       /* steel blue */
     --paper:#F8F7F4;
     --paper-2:#EEF1F4;
+    --card:#FFFFFF;
     --ink:#2F4054;
     --ink-soft:#5B6878;
     --line:#D6DEE6;
@@ -28,8 +30,7 @@
   *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
   html{scroll-behavior:smooth;overflow-x:hidden;overscroll-behavior-x:none;}
   body{
-    background:var(--paper);
-    color:var(--ink-soft);
+    background:var(--paper);color:var(--ink-soft);
     font-family:'Jost',sans-serif;font-weight:300;
     font-variant-numeric:lining-nums;font-feature-settings:'lnum' 1;
     overflow-x:hidden;position:relative;
@@ -42,12 +43,7 @@
   #splash::after{position:absolute;}
   img{display:block;max-width:100%;}
 
-  /* ───────── MONOGRAMA ───────── */
-  .splash-monoimg{width:min(80vw,360px);margin:0 auto;opacity:0;animation:fadeUp 1.1s .25s forwards;}
-  .hero-mb{width:min(30vw,112px);margin:0 auto;}
-  .footer-monoimg{width:min(62vw,240px);margin:0 auto 18px;}
-
-  /* ───────── SPLASH ───────── */
+  /* ═════════ SPLASH (ref. Hévylla & José) ═════════ */
   #splash{
     position:fixed;inset:0;z-index:1000;background:var(--paper);
     display:flex;flex-direction:column;align-items:center;justify-content:center;
@@ -55,189 +51,126 @@
     transition:opacity 1s ease, transform 1s ease;
   }
   #splash.hide{opacity:0;transform:scale(1.03);}
-  #splash .frame{position:absolute;inset:16px;border:1px solid var(--blue-soft);pointer-events:none;z-index:1;}
-  #splash .frame::after{content:'';position:absolute;inset:5px;border:1px solid var(--line);}
   #petals{position:absolute;inset:0;z-index:1;pointer-events:none;}
   .petal{position:absolute;opacity:0;animation:fall linear infinite;}
   .splash-inner{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;padding:0 28px;}
+  .splash-monoimg{width:min(80vw,360px);margin:0 auto;opacity:0;animation:fadeUp 1.1s .25s forwards;}
   .splash-date{
-    margin-top:30px;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:15px;letter-spacing:.5em;
+    margin-top:28px;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:15px;letter-spacing:.5em;
     color:var(--blue-deep);text-indent:.5em;opacity:0;animation:fadeUp 1s .8s forwards;
   }
-  .splash-city{
-    margin-top:10px;font-size:10.5px;letter-spacing:.42em;text-transform:uppercase;
-    color:var(--steel);text-indent:.42em;opacity:0;animation:fadeUp 1s 1s forwards;
-  }
   .splash-hint{
-    position:absolute;bottom:58px;z-index:2;font-size:13px;letter-spacing:.32em;
+    position:absolute;bottom:54px;z-index:2;font-size:14px;letter-spacing:.32em;
     text-transform:uppercase;color:var(--blue-deep);font-weight:400;opacity:0;
     animation:pulse 2.6s 1.6s infinite;text-indent:.32em;
-    border:1px solid var(--blue-soft);padding:14px 30px;border-radius:40px;background:rgba(248,247,244,.7);
+    border:1px solid var(--blue-soft);padding:14px 30px;border-radius:40px;
   }
 
-  /* ───────── MAIN ───────── */
+  /* ═════════ MAIN ═════════ */
   #main{display:none;position:relative;z-index:1;}
   #main.visible{display:block;}
   .wrap{max-width:540px;margin:0 auto;position:relative;}
   section{position:relative;}
-  .inner{padding:0 34px;}
-  .sec-label{
-    font-size:10.5px;letter-spacing:.45em;text-transform:uppercase;
-    color:var(--blue);text-align:center;text-indent:.45em;
-  }
-  .sec-title{
-    font-family:'Cormorant Garamond',serif;font-weight:400;
-    font-size:clamp(32px,9vw,44px);color:var(--ink);text-align:center;
-    line-height:1.05;margin-top:12px;
-  }
+  .inner{padding:0 26px;}
+  .center{text-align:center;}
+
+  /* títulos (ref. Marjorie & Nathan) */
+  .sec-label{font-size:9.5px;letter-spacing:.45em;text-indent:.45em;text-transform:uppercase;color:var(--blue);text-align:center;margin-bottom:10px;font-weight:400;}
+  .sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,8.6vw,42px);font-weight:400;text-align:center;line-height:1.15;color:var(--ink);}
   .sec-title .it{font-style:italic;color:var(--blue);}
-  .divider{display:flex;align-items:center;justify-content:center;gap:14px;margin:22px auto 0;max-width:230px;}
-  .divider .ln{height:1px;flex:1;background:linear-gradient(90deg,transparent,var(--blue-soft));}
+  .divider{display:flex;align-items:center;gap:14px;max-width:280px;margin:18px auto 0;}
+  .divider .ln{flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--blue-soft));}
   .divider .ln.r{background:linear-gradient(90deg,var(--blue-soft),transparent);}
-  .divider .dot{width:5px;height:5px;border:1px solid var(--blue);transform:rotate(45deg);}
+  .divider svg{flex-shrink:0;}
 
-  /* ───────── HERO (cartão) ───────── */
-  .hero{padding:22px 16px 0;}
-  .hero-card{
-    position:relative;text-align:center;padding:44px 0 0;
-    border:1px solid var(--blue-soft);background:rgba(255,255,255,.35);
-  }
-  .hero-card::before{content:'';position:absolute;inset:6px;border:1px solid var(--line);pointer-events:none;}
-  .hero-kicker{
-    margin-top:22px;font-family:'Cormorant Garamond',serif;font-weight:500;
-    font-size:clamp(15px,4.4vw,19px);letter-spacing:.32em;text-indent:.32em;text-transform:uppercase;color:var(--blue-deep);
-  }
-  .hero-names{
-    font-family:'Pinyon Script',cursive;font-weight:400;color:var(--blue-deep);
-    font-size:clamp(64px,19vw,100px);line-height:1;margin-top:6px;
-  }
-  .hero-names .nm{display:block;}
-  .hero-names .e-line{display:flex;align-items:center;justify-content:center;gap:14px;margin:-.06em auto .02em;width:min(76%,330px);}
-  .hero-names .e-line i{flex:1;height:1px;background:var(--blue);opacity:.65;}
-  .hero-names .e-line em{font-style:normal;font-size:.36em;line-height:1;color:var(--blue);padding:0 2px;}
-  .hero-date{
-    margin-top:18px;font-family:'Cormorant Garamond',serif;font-weight:500;
-    font-size:clamp(14px,4.2vw,18px);letter-spacing:.22em;text-indent:.22em;text-transform:uppercase;color:var(--blue-deep);
-  }
-  .hero-city{margin-top:8px;font-size:10.5px;letter-spacing:.4em;text-indent:.4em;text-transform:uppercase;color:var(--steel);}
-  .hero-church{margin:26px 8px 8px;}
-  .hero-church img{width:100%;height:auto;}
+  /* ═════════ HERO — foto + nomes (ref. Hévylla & José) ═════════ */
+  .hero-photo{position:relative;width:100vw;left:50%;margin-left:-50vw;height:62vh;min-height:420px;max-height:700px;overflow:hidden;
+    -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 52%,rgba(0,0,0,.55) 74%,rgba(0,0,0,0) 96%);
+            mask-image:linear-gradient(to bottom,#000 0%,#000 52%,rgba(0,0,0,.55) 74%,rgba(0,0,0,0) 96%);}
+  .hero-photo img{width:100%;height:100%;object-fit:cover;object-position:52% 32%;filter:contrast(.98);}
+  .hero-photo::before{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(70,90,114,.10),rgba(70,90,114,0) 40%);}
+  .hero-cap{position:relative;z-index:2;text-align:center;padding:0 24px;margin-top:-92px;}
+  .hero-names{font-family:'Pinyon Script',cursive;font-weight:400;color:var(--ink);font-size:clamp(62px,18vw,100px);line-height:.95;}
+  .hero-names .amp{display:block;color:var(--blue);font-size:.55em;line-height:1.1;}
+  .hero-date{margin-top:18px;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:15px;letter-spacing:.45em;text-indent:.45em;color:var(--blue-deep);}
+  .hero-sub{margin-top:10px;font-size:11px;letter-spacing:.4em;text-indent:.4em;text-transform:uppercase;color:var(--steel);}
 
-  /* ───────── VERSE ───────── */
-  #verse{padding:70px 0 60px;text-align:center;}
-  .verse-q{
-    font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:400;
-    font-size:clamp(22px,6vw,28px);line-height:1.5;color:var(--ink);
-    max-width:440px;margin:0 auto;
-  }
-  .verse-ref{margin-top:24px;font-size:10.5px;letter-spacing:.4em;text-transform:uppercase;color:var(--steel);text-indent:.4em;}
+  /* ═════════ VERSÍCULO — faixa escura (ref. Marjorie & Nathan) ═════════ */
+  #verse{background:var(--night);padding:78px 0;margin-top:70px;}
+  #verse .vorn{display:block;margin:0 auto 28px;opacity:.75;}
+  #verse .quote{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:clamp(22px,5.6vw,28px);line-height:1.6;color:#F4F6F8;text-align:center;max-width:460px;margin:0 auto;}
+  #verse .ref{font-size:11px;letter-spacing:.34em;text-indent:.34em;text-transform:uppercase;color:var(--powder);text-align:center;margin-top:24px;}
 
-  /* ───────── BÊNÇÃO / PAIS ───────── */
-  #bencao{padding:16px 0 10px;text-align:center;}
-  .parents-block{text-align:center;}
-  .parents-k{font-size:9px;letter-spacing:.34em;text-transform:uppercase;color:var(--blue);text-indent:.34em;}
-  .parents-v{font-family:'Cormorant Garamond',serif;font-size:21px;color:var(--ink);margin-top:11px;line-height:1.45;}
-  .parents-v .mem{font-style:italic;font-size:14px;color:var(--blue);}
+  /* ═════════ LOCAL — linha do tempo (ref. Marjorie & Nathan) ═════════ */
+  #info{padding:78px 0 70px;}
+  .info-date{margin-top:24px;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(20px,5vw,24px);color:var(--ink);}
+  .info-church{margin:30px -6px 0;}
+  .info-church img{width:100%;height:auto;}
+  .timeline{margin-top:34px;position:relative;}
+  .timeline::before{content:'';position:absolute;left:10px;top:0;bottom:0;width:1px;background:linear-gradient(180deg,transparent,var(--blue-soft) 14%,var(--blue-soft) 86%,transparent);transform:translateX(-50%);}
+  .tl-item{display:grid;grid-template-columns:20px 1fr;align-items:flex-start;margin-bottom:38px;}
+  .tl-item:last-child{margin-bottom:0;}
+  .tl-dot{width:10px;height:10px;background:var(--blue);border-radius:50%;margin-top:5px;justify-self:center;box-shadow:0 0 0 4px rgba(95,120,150,.15);position:relative;z-index:1;}
+  .tl-c{padding-left:18px;text-align:left;}
+  .tl-time{font-size:9.5px;letter-spacing:.34em;text-transform:uppercase;color:var(--blue);margin-bottom:6px;font-weight:400;}
+  .tl-title{font-family:'Cormorant Garamond',serif;font-size:23px;font-weight:500;color:var(--ink);margin-bottom:4px;line-height:1.2;}
+  .tl-desc{font-size:13px;color:var(--ink-soft);line-height:1.6;}
+  .info-btns{margin-top:36px;display:flex;flex-direction:column;align-items:center;gap:12px;}
+  .btn-line{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-width:250px;border:1px solid var(--blue-soft);color:var(--ink);padding:14px 26px;border-radius:2px;font-family:'Jost',sans-serif;font-size:11px;font-weight:400;letter-spacing:.3em;text-indent:.3em;text-transform:uppercase;text-decoration:none;transition:background .25s,border-color .25s,color .25s;cursor:pointer;background:transparent;}
+  .btn-line:hover{background:var(--blue-deep);border-color:var(--blue-deep);color:var(--paper);}
+  .btn-line svg{width:14px;height:14px;flex-shrink:0;}
 
-  /* ───────── DAY / LOCATIONS ───────── */
-  #day{padding:52px 0 8px;}
-  .quickfacts{display:flex;justify-content:center;gap:0;margin:40px 0 8px;}
-  .qf{flex:1;text-align:center;padding:0 6px;max-width:170px;}
-  .qf + .qf{border-left:1px solid var(--line);}
-  .qf .k{font-size:9.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--blue);text-indent:.3em;}
-  .qf .v{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:21px;color:var(--ink);margin-top:9px;line-height:1.2;}
-  .qf .v small{display:block;font-family:'Jost';font-weight:300;font-size:11px;letter-spacing:.04em;color:var(--ink-soft);margin-top:3px;}
+  /* ═════════ DRESS CODE (ref. Marjorie & Nathan) ═════════ */
+  #dress{padding:78px 0;background:linear-gradient(160deg,rgba(180,195,211,.16),transparent 58%);}
+  .dress-main{margin-top:26px;font-family:'Cormorant Garamond',serif;font-size:clamp(30px,7.5vw,40px);color:var(--ink);}
+  .dress-note{text-align:center;margin-top:22px;font-size:14px;color:var(--ink-soft);line-height:1.75;max-width:440px;margin-left:auto;margin-right:auto;}
+  .dress-note strong{color:var(--blue-deep);font-weight:400;}
+  .dress-quote{margin:22px auto 0;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(17px,4.4vw,20px);color:var(--steel);max-width:440px;line-height:1.65;}
+  .dress-avoid{margin:34px auto 0;max-width:460px;padding:24px 22px;text-align:center;border:1px solid var(--line);border-radius:8px;background:rgba(255,255,255,.5);}
+  .dress-avoid-title{font-size:10.5px;letter-spacing:.34em;text-indent:.34em;text-transform:uppercase;color:var(--blue);}
+  .swatches{display:flex;justify-content:center;gap:12px;margin:16px 0 12px;flex-wrap:wrap;}
+  .sw{width:30px;height:30px;border-radius:50%;box-shadow:0 1px 4px rgba(0,0,0,.08);border:1px solid rgba(47,64,84,.12);}
+  .dress-avoid-text{font-family:'Cormorant Garamond',serif;font-size:clamp(16px,4.2vw,18px);color:var(--ink);line-height:1.6;}
+  .dress-avoid-text strong{font-weight:600;}
 
-  .place{margin-top:48px;}
-  .place-card{
-    position:relative;text-align:center;padding:38px 22px 36px;
-    border:1px solid var(--blue-soft);background:rgba(255,255,255,.4);
-  }
-  .place-card::before{content:'';position:absolute;inset:5px;border:1px solid var(--line);pointer-events:none;}
-  .place-tag{
-    display:inline-block;font-size:10px;letter-spacing:.42em;text-transform:uppercase;
-    color:#fff;background:var(--blue-deep);padding:7px 16px;text-indent:.42em;
-  }
-  .place-time{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:28px;color:var(--blue);margin-top:16px;}
-  .place-name{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:25px;color:var(--ink);margin-top:6px;line-height:1.2;}
-  .place-addr{font-size:13px;line-height:1.7;color:var(--ink-soft);margin-top:12px;max-width:360px;margin-left:auto;margin-right:auto;}
-  .btn-line{
-    display:inline-flex;align-items:center;gap:9px;margin-top:22px;
-    font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--ink);
-    border:1px solid var(--ink);padding:12px 24px;text-decoration:none;text-indent:.26em;
-    transition:.35s;background:transparent;font-family:'Jost',sans-serif;font-weight:300;
-  }
-  .btn-line:hover{background:var(--ink);color:var(--paper);}
-  .btn-line svg{width:13px;height:13px;}
-  .btn-ghost{border-color:var(--blue-soft);color:var(--blue-deep);margin-top:14px;}
-  .btn-ghost:hover{background:var(--blue-deep);border-color:var(--blue-deep);}
-  .place-divider{width:1px;height:56px;background:linear-gradient(var(--blue-soft),transparent,var(--blue-soft));margin:44px auto 0;}
-
-  /* ───────── COUNTDOWN ───────── */
+  /* ═════════ CONTAGEM (ref. Marjorie & Nathan) ═════════ */
   #countdown{padding:78px 0;text-align:center;}
-  .cd-wrap{display:flex;justify-content:center;gap:0;margin-top:40px;}
-  .cd-unit{flex:1;max-width:90px;}
-  .cd-unit + .cd-unit{border-left:1px solid var(--line);}
-  .cd-num{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(38px,12vw,52px);color:var(--ink);line-height:1;display:block;}
-  .cd-lbl{font-size:9.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--blue);margin-top:10px;display:block;}
+  .cd-wrap{display:flex;justify-content:center;gap:clamp(10px,4.5vw,36px);margin-top:42px;}
+  .cd-unit{text-align:center;min-width:62px;}
+  .cd-num{font-family:'Cormorant Garamond',serif;font-size:clamp(48px,13vw,72px);font-weight:300;color:var(--ink);line-height:1;display:block;}
+  .cd-lbl{font-size:9px;letter-spacing:.32em;text-indent:.32em;text-transform:uppercase;color:var(--blue);margin-top:8px;display:block;}
 
-  /* ───────── MANUAL DO CONVIDADO ───────── */
-  #manual{padding:58px 0;}
-  .manual-square{
-    position:relative;width:min(100%,460px);margin:34px auto 0;aspect-ratio:1/1;
-    background-color:var(--paper-2);
-    border:1px solid var(--line);border-radius:3px;
-    box-shadow:0 24px 48px -36px rgba(47,64,84,.5);
-    display:grid;grid-template-columns:1fr 1fr;grid-auto-rows:1fr;
-    padding:clamp(16px,4.5vw,26px) clamp(12px,3.6vw,22px);
-    text-align:left;
-  }
-  .manual-square .mitem{display:flex;align-items:center;gap:clamp(8px,2.4vw,12px);padding:4px 4px;min-width:0;}
-  .manual-square .mi{flex:0 0 auto;color:var(--blue);display:flex;align-items:center;justify-content:center;}
-  .manual-square .mi svg{width:clamp(21px,5.6vw,27px);height:clamp(21px,5.6vw,27px);}
-  .manual-square .mt{font-family:'Jost',sans-serif;font-weight:300;font-size:clamp(11.5px,3.2vw,14.5px);color:var(--ink);line-height:1.25;min-width:0;}
-  @media(min-width:520px){.manual-square{column-gap:20px;}}
+  /* ═════════ PRESENTES — cartão (ref. Vitória & Felipe) ═════════ */
+  #gifts{padding:64px 0;text-align:center;}
+  .card{background:var(--card);border-radius:18px;box-shadow:0 18px 46px -18px rgba(47,64,84,.22);padding:38px 28px;margin-top:30px;}
+  .card-text{font-size:13.5px;line-height:1.9;color:var(--ink-soft);margin-bottom:26px;}
+  .btn-pill{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;
+    background:var(--blue-deep);color:#fff;border:1px solid var(--blue-deep);border-radius:30px;
+    padding:16px 24px;font-family:'Jost',sans-serif;font-size:12px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;transition:.3s;}
+  .btn-pill:hover{background:var(--blue);border-color:var(--blue);}
+  .btn-pill svg{width:16px;height:16px;flex-shrink:0;}
+  .pix-title{font-size:11.5px;letter-spacing:.2em;color:var(--blue);margin:34px 0 20px;font-weight:500;display:flex;align-items:center;gap:14px;text-transform:uppercase;}
+  .pix-title::before,.pix-title::after{content:'';flex:1;height:1px;background:var(--line);}
+  .pix-box{background:var(--paper-2);border-radius:16px;padding:22px 20px;}
+  .pix-key{font-size:16px;color:var(--ink);font-weight:500;letter-spacing:.03em;word-break:break-all;}
+  .pix-name{font-size:11.5px;color:var(--steel);margin-top:4px;}
+  .copy-btn{display:inline-flex;align-items:center;gap:8px;margin-top:16px;background:var(--blue-deep);color:#fff;border:none;border-radius:30px;padding:11px 24px;font-size:11px;letter-spacing:.16em;font-family:'Jost',sans-serif;cursor:pointer;}
+  .copy-btn svg{width:13px;height:13px;}
+  .signature{font-family:'Pinyon Script',cursive;font-size:34px;color:var(--blue-deep);margin-top:24px;}
 
-  /* ───────── DRESS CODE ───────── */
-  #dress{padding:58px 0;text-align:center;}
-  .dress-icon{width:34px;height:34px;margin:26px auto 0;color:var(--blue);}
-  .dress-main{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:32px;color:var(--ink);margin-top:16px;}
-  .dress-note{font-size:13.5px;line-height:1.8;color:var(--ink-soft);max-width:380px;margin:14px auto 0;}
-  .dress-note strong{color:var(--ink);font-weight:400;}
-  .palette{margin:34px auto 0;}
-  .palette-k{font-size:9.5px;letter-spacing:.34em;text-transform:uppercase;color:var(--blue);text-indent:.34em;}
-  .swatches{display:flex;justify-content:center;gap:10px;margin-top:16px;}
-  .swatches span{width:34px;height:34px;border-radius:50%;border:1px solid var(--line);box-shadow:inset 0 0 0 3px rgba(255,255,255,.55);}
-  .palette-names{margin-top:12px;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:17px;color:var(--ink-soft);}
-
-  /* ───────── GIFTS / RSVP ───────── */
-  #gifts,#rsvp{padding:58px 0;text-align:center;}
-  #rsvp{padding-bottom:44px;}
-  .gift-note,.rsvp-note{font-size:13.5px;line-height:1.85;color:var(--ink-soft);max-width:400px;margin:26px auto 0;}
-  .btn-fill{
-    display:inline-flex;align-items:center;gap:10px;margin-top:28px;
-    font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--paper);
-    background:var(--blue-deep);padding:15px 30px;text-decoration:none;text-indent:.26em;
-    transition:.35s;border:1px solid var(--blue-deep);cursor:pointer;
-  }
+  /* ═════════ CONFIRMAÇÃO (ref. Hévylla & José) ═════════ */
+  #rsvp{padding:58px 0 44px;text-align:center;}
+  .rsvp-note{font-size:13.5px;line-height:1.85;color:var(--ink-soft);max-width:400px;margin:26px auto 0;}
+  .rsvp-ok{display:flex;flex-direction:column;align-items:center;}
+  .btn-fill{display:inline-flex;align-items:center;gap:10px;margin-top:28px;font-size:11px;letter-spacing:.26em;text-indent:.26em;text-transform:uppercase;color:var(--paper);background:var(--blue-deep);padding:15px 30px;text-decoration:none;transition:.35s;border:1px solid var(--blue-deep);cursor:pointer;font-weight:400;}
   .btn-fill:hover{background:transparent;color:var(--blue-deep);}
   .btn-fill svg{width:14px;height:14px;}
-  .btn-soon{
-    display:inline-flex;align-items:center;gap:10px;margin-top:28px;
-    font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--steel);
-    background:var(--paper-2);padding:15px 30px;text-indent:.26em;border:1px solid var(--line);cursor:default;
-  }
-  .rsvp-ok{display:flex;flex-direction:column;align-items:center;}
   .btn-wa{background:#2e7d52;border-color:#2e7d52;color:#fff;margin-top:14px;}
   .btn-wa:hover{background:transparent;color:#2e7d52;}
   .btn-wa svg{width:17px;height:17px;}
+  .btn-soon{display:inline-flex;margin-top:28px;font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--steel);background:var(--paper-2);padding:15px 30px;border:1px solid var(--line);}
 
-  /* ───────── MUSIC ───────── */
-  #music{padding:30px 0 8px;text-align:center;}
-  .music-row{display:inline-flex;align-items:center;gap:12px;color:var(--steel);font-size:11px;letter-spacing:.32em;text-transform:uppercase;}
-  .music-row .bars{display:inline-flex;align-items:flex-end;gap:2px;height:14px;}
-  .music-row .bars i{width:2px;background:var(--blue);animation:eq 1s ease-in-out infinite;}
-  .music-row .bars i:nth-child(2){animation-delay:.2s}.music-row .bars i:nth-child(3){animation-delay:.4s}.music-row .bars i:nth-child(4){animation-delay:.1s}
+  /* ═════════ MÚSICA ═════════ */
   #musicToggle{
     position:fixed;right:16px;bottom:16px;z-index:900;
     display:none;align-items:center;gap:9px;cursor:pointer;
@@ -249,15 +182,15 @@
   #musicToggle:hover{background:var(--blue);color:#fff;border-color:var(--blue);}
   #musicToggle svg{width:14px;height:14px;flex-shrink:0;}
   #musicToggle .mt-label{white-space:nowrap;text-indent:.2em;}
-  /* player do YouTube fica invisível (só áudio) */
   #ytWrap{position:fixed;left:0;bottom:0;width:200px;height:200px;opacity:0;pointer-events:none;z-index:-1;overflow:hidden;}
 
-  /* ───────── FOOTER ───────── */
-  footer{padding:60px 30px 48px;text-align:center;}
-  .footer-date{margin-top:6px;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:13px;letter-spacing:.36em;text-transform:uppercase;color:var(--blue-deep);text-indent:.36em;}
+  /* ═════════ RODAPÉ (ref. Hévylla & José) ═════════ */
+  footer{padding:56px 30px 48px;text-align:center;}
+  .footer-monoimg{width:min(62vw,240px);margin:0 auto 16px;}
+  .footer-date{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:13px;letter-spacing:.36em;text-indent:.36em;color:var(--blue-deep);}
   .footer-note{margin-top:18px;font-size:15px;color:var(--steel);font-style:italic;font-family:'Cormorant Garamond',serif;}
 
-  /* ───────── REVEAL ───────── */
+  /* ═════════ REVEAL ═════════ */
   .reveal{opacity:0;transform:translateY(22px);transition:opacity 1s cubic-bezier(.2,.6,.2,1),transform 1s cubic-bezier(.2,.6,.2,1);}
   .reveal.visible{opacity:1;transform:none;}
   .reveal.d1{transition-delay:.12s}.reveal.d2{transition-delay:.24s}.reveal.d3{transition-delay:.36s}
@@ -265,22 +198,20 @@
   @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
   @keyframes pulse{0%,100%{opacity:.15}50%{opacity:1}}
   @keyframes fall{0%{opacity:0;transform:translateY(0) rotate(0)}10%{opacity:.75}100%{opacity:0;transform:translateY(108vh) rotate(320deg)}}
-  @keyframes eq{0%,100%{height:4px}50%{height:14px}}
 
-  @media(max-width:380px){.inner{padding:0 22px}.qf .v{font-size:18px}.qf .k{letter-spacing:.2em}}
-  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}.splash-monoimg,.splash-date,.splash-city,.splash-hint{opacity:1}}
+  @media(max-width:380px){.inner{padding:0 20px}.card{padding:32px 20px}.btn-line{min-width:0;width:100%}}
+  @media(min-width:760px){.hero-photo{height:70vh;}.hero-photo img{object-position:52% 34%;}}
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}.splash-monoimg,.splash-date,.splash-hint{opacity:1}}
 </style>
 </head>
 <body>
 
 <!-- ════════ SPLASH ════════ -->
 <div id="splash">
-  <div class="frame"></div>
   <div id="petals"></div>
   <div class="splash-inner">
     <img class="splash-monoimg" src="midia/monograma.png" alt="Milla e Bruno">
     <p class="splash-date" id="splashDate"></p>
-    <p class="splash-city" id="splashCity"></p>
   </div>
   <p class="splash-hint">toque para abrir</p>
 </div>
@@ -289,175 +220,139 @@
 <div id="main">
  <div class="wrap">
 
-  <!-- HERO -->
+  <!-- HERO: foto + nomes -->
   <section class="hero">
-    <div class="hero-card">
-      <img class="hero-mb" src="midia/monograma-mb.png" alt="M B">
-      <p class="hero-kicker">vamos nos casar</p>
+    <div class="hero-photo">
+      <img src="midia/foto-casal.jpg" alt="Milla e Bruno" width="1280" height="854">
+    </div>
+    <div class="hero-cap">
       <h1 class="hero-names" id="heroNames" aria-label="Milla e Bruno"></h1>
       <p class="hero-date" id="heroDate"></p>
-      <p class="hero-city" id="heroCity"></p>
-      <div class="hero-church"><img src="midia/igreja.webp" alt="Casa Pia de São Joaquim" width="1600" height="848"></div>
+      <p class="hero-sub" id="heroSub"></p>
     </div>
   </section>
 
-  <!-- VERSE -->
+  <!-- FRASE / VERSÍCULO -->
   <section id="verse">
     <div class="inner">
-      <p class="verse-q reveal" id="verseText"></p>
-      <p class="verse-ref reveal d1" id="verseRef"></p>
+      <svg class="vorn reveal" width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+        <path d="M20 6c-3 4-8 6-8 11a8 8 0 0 0 16 0c0-5-5-7-8-11z" stroke="#C9D5E1" stroke-width="1"/>
+        <path d="M20 13v14M16.5 19.5 20 23l3.5-3.5" stroke="#C9D5E1" stroke-width=".7"/>
+        <path d="M20 31v4M14 33h12" stroke="#C9D5E1" stroke-width=".7"/>
+      </svg>
+      <p class="quote reveal" id="verseText"></p>
+      <p class="ref reveal d1" id="verseRef"></p>
     </div>
   </section>
 
-  <!-- BÊNÇÃO / PAIS -->
-  <section id="bencao">
-    <div class="inner">
-      <p class="sec-label reveal">o convite</p>
-      <h2 class="sec-title reveal">Com a bênção de <span class="it">Deus</span></h2>
-      <div class="divider reveal"><span class="ln"></span><span class="dot"></span><span class="ln r"></span></div>
-      <p class="rsvp-note reveal d1" style="margin-top:30px">e de suas famílias, Milla e Bruno convidam você para a celebração do seu casamento.</p>
-      <div id="paisNoivaBlock" class="parents-block reveal d1" style="margin-top:36px;display:none">
-        <p class="parents-k">os pais da noiva</p>
-        <p class="parents-v" id="paisNoiva"></p>
-      </div>
-      <div id="paisDivider" class="place-divider reveal" style="margin:34px auto;display:none"></div>
-      <div id="paisNoivoBlock" class="parents-block reveal d1" style="display:none">
-        <p class="parents-k">os pais do noivo</p>
-        <p class="parents-v" id="paisNoivo"></p>
-      </div>
-    </div>
-  </section>
-
-  <!-- DAY / LOCATIONS -->
-  <section id="day">
+  <!-- LOCAL -->
+  <section id="info">
     <div class="inner">
       <p class="sec-label reveal">o grande dia</p>
       <h2 class="sec-title reveal">Celebrem <span class="it">conosco</span></h2>
-      <div class="divider reveal"><span class="ln"></span><span class="dot"></span><span class="ln r"></span></div>
+      <div class="divider reveal"><div class="ln"></div><svg width="10" height="10" viewBox="0 0 10 10"><path d="M5 0l1.5 3.5L10 5 6.5 6.5 5 10 3.5 6.5 0 5l3.5-1.5z" fill="#5F7896"/></svg><div class="ln r"></div></div>
+      <p class="info-date center reveal" id="infoDate"></p>
 
-      <div class="quickfacts reveal d1">
-        <div class="qf"><p class="k">Data</p><p class="v">09 de Janeiro<small>2027 · sábado</small></p></div>
-        <div class="qf"><p class="k">Horário</p><p class="v" id="qfHora">19h<small>cerimônia</small></p></div>
-        <div class="qf"><p class="k">Local</p><p class="v">Salvador<small>Bahia</small></p></div>
-      </div>
+      <div class="info-church reveal"><img src="midia/igreja.webp" alt="Casa Pia de São Joaquim" width="1600" height="848" loading="lazy"></div>
 
-      <!-- Cerimônia -->
-      <div class="place reveal">
-        <div class="place-card">
-          <span class="place-tag">Cerimônia</span>
-          <p class="place-time" id="placeTime"></p>
-          <p class="place-name" id="placeName"></p>
-          <p class="place-addr" id="placeAddr"></p>
-          <a class="btn-line" id="mapCerimonia" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="none"><path d="M12 2C8 2 5 5 5 9c0 5 7 13 7 13s7-8 7-13c0-4-3-7-7-7z" stroke="currentColor" stroke-width="1.3"/><circle cx="12" cy="9" r="2.4" stroke="currentColor" stroke-width="1.3"/></svg>
-            Ver no mapa
-          </a><br>
-          <a class="btn-line btn-ghost" id="calLink" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="none"><rect x="3.5" y="5" width="17" height="15" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M3.5 9.5h17M8 3v4M16 3v4" stroke="currentColor" stroke-width="1.3"/></svg>
-            Salvar na agenda
-          </a>
+      <div class="timeline">
+        <div class="tl-item reveal">
+          <div class="tl-dot"></div>
+          <div class="tl-c">
+            <p class="tl-time" id="tlTime"></p>
+            <p class="tl-title" id="tlTitle"></p>
+            <p class="tl-desc" id="tlDesc"></p>
+          </div>
+        </div>
+        <div class="tl-item reveal">
+          <div class="tl-dot"></div>
+          <div class="tl-c">
+            <p class="tl-time">Logo após · Recepção</p>
+            <p class="tl-title">No mesmo local</p>
+            <p class="tl-desc">A recepção acontece na própria Casa Pia de São Joaquim, logo após a cerimônia.</p>
+          </div>
         </div>
       </div>
 
-      <div class="place-divider reveal"></div>
-
-      <!-- Recepção -->
-      <div class="place reveal" style="margin-top:44px">
-        <div class="place-card">
-          <span class="place-tag" style="background:var(--steel)">Recepção</span>
-          <p class="place-time" style="color:var(--steel)">logo após</p>
-          <p class="place-name">No mesmo local</p>
-          <p class="place-addr">A recepção acontece na própria Casa Pia de São Joaquim, logo após a cerimônia.</p>
-        </div>
+      <div class="info-btns reveal">
+        <a class="btn-line" id="mapCerimonia" target="_blank" rel="noopener">
+          <svg viewBox="0 0 13 13" fill="none"><path d="M6.5 1C4.3 1 2.5 2.8 2.5 5c0 3 4 7 4 7s4-4 4-7c0-2.2-1.8-4-4-4z" stroke="currentColor" stroke-width=".9"/><circle cx="6.5" cy="5" r="1.4" stroke="currentColor" stroke-width=".9"/></svg>
+          Ver no mapa
+        </a>
+        <a class="btn-line" id="calLink" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none"><rect x="3.5" y="5" width="17" height="15" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M3.5 9.5h17M8 3v4M16 3v4" stroke="currentColor" stroke-width="1.3"/></svg>
+          Salvar na agenda
+        </a>
       </div>
-    </div>
-  </section>
-
-  <!-- COUNTDOWN -->
-  <section id="countdown">
-    <div class="inner">
-      <p class="sec-label reveal">a contagem começou</p>
-      <h2 class="sec-title reveal">Falta <span class="it">pouco</span></h2>
-      <div class="cd-wrap reveal d1">
-        <div class="cd-unit"><span class="cd-num" id="cd-d">00</span><span class="cd-lbl">dias</span></div>
-        <div class="cd-unit"><span class="cd-num" id="cd-h">00</span><span class="cd-lbl">horas</span></div>
-        <div class="cd-unit"><span class="cd-num" id="cd-m">00</span><span class="cd-lbl">min</span></div>
-        <div class="cd-unit"><span class="cd-num" id="cd-s">00</span><span class="cd-lbl">seg</span></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- MUSIC -->
-  <section id="music">
-    <div class="inner">
-      <div class="music-row" id="musicRow" style="display:none">
-        <span class="bars"><i></i><i></i><i></i><i></i></span>
-        <span>tocando agora</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- MANUAL DO CONVIDADO -->
-  <section id="manual">
-    <div class="inner">
-      <p class="sec-label reveal">para tornar o dia perfeito</p>
-      <h2 class="sec-title reveal">Manual do <span class="it">Convidado</span></h2>
-      <div class="divider reveal"><span class="ln"></span><span class="dot"></span><span class="ln r"></span></div>
-      <div class="manual-square reveal d1" id="manualList"></div>
     </div>
   </section>
 
   <!-- DRESS CODE -->
   <section id="dress">
-    <div class="inner">
+    <div class="inner center">
       <p class="sec-label reveal">traje</p>
-      <h2 class="sec-title reveal">Dress <span class="it">code</span></h2>
-      <div class="divider reveal"><span class="ln"></span><span class="dot"></span><span class="ln r"></span></div>
-      <svg class="dress-icon reveal d1" viewBox="0 0 48 48" fill="none"><path d="M24 12a3 3 0 100-6 3 3 0 000 6zm0 0v3l-13 9c-2 1.4-1 4 1.4 4h23.2c2.4 0 3.4-2.6 1.4-4l-13-9" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M7 32h34" stroke="currentColor" stroke-width="1.3"/></svg>
-      <p class="dress-main reveal d1" id="dressMain"></p>
-      <p class="dress-note reveal d2">Pedimos que evitem o <strong>branco</strong>, reservado à noiva, e os tons de <strong>azul acinzentado</strong>, escolhidos para as madrinhas. Fora isso, fiquem à vontade para celebrar com elegância.</p>
-      <div class="palette reveal d2">
-        <p class="palette-k">as cores do nosso dia</p>
+      <h2 class="sec-title reveal">Dress <span class="it">Code</span></h2>
+      <div class="divider reveal"><div class="ln"></div><svg width="10" height="10" viewBox="0 0 10 10"><path d="M5 0l1.5 3.5L10 5 6.5 6.5 5 10 3.5 6.5 0 5l3.5-1.5z" fill="#5F7896"/></svg><div class="ln r"></div></div>
+      <p class="dress-main reveal" id="dressMain"></p>
+      <p class="dress-note reveal">Para as mulheres, <strong>vestido longo ou midi</strong> — ou um conjunto elegante.</p>
+      <p class="dress-note reveal" style="margin-top:12px">Para os homens, <strong>terno</strong> ou <strong>calça social com blazer</strong>; a gravata é opcional.</p>
+      <p class="dress-quote reveal">“Venham elegantes e confortáveis para celebrar conosco a noite toda.”</p>
+      <div class="dress-avoid reveal">
+        <p class="dress-avoid-title">Cores a evitar</p>
         <div class="swatches">
-          <span style="background:#FFFFFF"></span>
-          <span style="background:#C3D0DD"></span>
-          <span style="background:#A9BED3"></span>
-          <span style="background:#7F99AE"></span>
-          <span style="background:#647A8E"></span>
-          <span style="background:#4F6075"></span>
+          <span class="sw" style="background:#FFFFFF"></span>
+          <span class="sw" style="background:#C3D0DD"></span>
+          <span class="sw" style="background:#A9BED3"></span>
+          <span class="sw" style="background:#7F99AE"></span>
+          <span class="sw" style="background:#647A8E"></span>
+          <span class="sw" style="background:#4F6075"></span>
         </div>
-        <p class="palette-names">branco &amp; azul acinzentado</p>
+        <p class="dress-avoid-text">Pedimos, com carinho, que os convidados <strong>não usem branco</strong>, reservado à noiva, nem <strong>tons de azul acinzentado</strong>, escolhidos para as madrinhas.</p>
       </div>
     </div>
   </section>
 
-  <!-- GIFTS -->
-  <section id="gifts">
+  <!-- CONTAGEM -->
+  <section id="countdown">
     <div class="inner">
-      <p class="sec-label reveal">presentes</p>
-      <h2 class="sec-title reveal">Sua presença é o <span class="it">presente</span></h2>
-      <div class="divider reveal"><span class="ln"></span><span class="dot"></span><span class="ln r"></span></div>
-      <p class="gift-note reveal d1">Se desejarem nos presentear e contribuir para o início desta nova história, preparamos uma lista com muito carinho.</p>
-      <div class="reveal d2" id="giftAction"></div>
+      <p class="sec-label reveal">contagem regressiva</p>
+      <h2 class="sec-title reveal">Faltam…</h2>
+      <div class="divider reveal"><div class="ln"></div><svg width="10" height="10" viewBox="0 0 10 10"><path d="M5 0l1.5 3.5L10 5 6.5 6.5 5 10 3.5 6.5 0 5l3.5-1.5z" fill="#5F7896"/></svg><div class="ln r"></div></div>
+      <div class="cd-wrap reveal">
+        <div class="cd-unit"><span class="cd-num" id="cd-d">00</span><span class="cd-lbl">dias</span></div>
+        <div class="cd-unit"><span class="cd-num" id="cd-h">00</span><span class="cd-lbl">horas</span></div>
+        <div class="cd-unit"><span class="cd-num" id="cd-m">00</span><span class="cd-lbl">minutos</span></div>
+        <div class="cd-unit"><span class="cd-num" id="cd-s">00</span><span class="cd-lbl">segundos</span></div>
+      </div>
     </div>
   </section>
 
-  <!-- RSVP -->
+  <!-- PRESENTES -->
+  <section id="gifts">
+    <div class="inner">
+      <p class="sec-label reveal">lista de presentes</p>
+      <h2 class="sec-title reveal">Sugestões de <span class="it">presentes</span></h2>
+      <div class="divider reveal"><div class="ln"></div><svg width="10" height="10" viewBox="0 0 10 10"><path d="M5 0l1.5 3.5L10 5 6.5 6.5 5 10 3.5 6.5 0 5l3.5-1.5z" fill="#5F7896"/></svg><div class="ln r"></div></div>
+      <div class="card reveal" id="giftCard"></div>
+    </div>
+  </section>
+
+  <!-- CONFIRMAÇÃO -->
   <section id="rsvp">
     <div class="inner">
       <p class="sec-label reveal">confirmação de presença</p>
       <h2 class="sec-title reveal">Você <span class="it">vem?</span></h2>
-      <div class="divider reveal"><span class="ln"></span><span class="dot"></span><span class="ln r"></span></div>
+      <div class="divider reveal"><div class="ln"></div><svg width="10" height="10" viewBox="0 0 10 10"><path d="M5 0l1.5 3.5L10 5 6.5 6.5 5 10 3.5 6.5 0 5l3.5-1.5z" fill="#5F7896"/></svg><div class="ln r"></div></div>
       <p class="rsvp-note reveal d1">Sua presença fará deste dia um momento ainda mais especial. Confirme com um toque no botão abaixo.</p>
       <div class="reveal d2" id="rsvpAction"></div>
     </div>
   </section>
 
-  <!-- FOOTER -->
+  <!-- RODAPÉ -->
   <footer>
-    <img class="footer-monoimg" src="midia/monograma.png" alt="Milla e Bruno">
+    <img class="footer-monoimg" src="midia/monograma.png" alt="Milla e Bruno" loading="lazy">
     <p class="footer-date" id="footerDate"></p>
-    <p class="footer-note">"O amor jamais acabará." · 1 Coríntios 13:8</p>
+    <p class="footer-note">“O amor jamais acabará.” · 1 Coríntios 13:8</p>
   </footer>
 
  </div><!-- /.wrap -->
@@ -484,39 +379,38 @@ const CONFIG = {
   cidade:    'Salvador · Bahia',
 
   dataEvento:'2027-01-09T19:00:00-03:00',   // contagem regressiva (horário de Salvador)
-  dataTexto: '09 de Janeiro de 2027',
+  dataTexto: 'Sábado, 09 de Janeiro de 2027',
   dataCurta: '09 · 01 · 2027',
   hora:      '19h',
 
   // local (cerimônia e recepção no mesmo espaço)
   localNome:     'Casa Pia de São Joaquim',
-  localEndereco: 'Av. Jequitaia, 375 — Calçada<br>Salvador — BA, 40411-120',
+  localEndereco: 'Av. Jequitaia, 375 · Calçada<br>Salvador — BA, 40411-120',
   mapCerimonia:  'https://maps.app.goo.gl/5R6JD9rTH6EJaRoR7',
 
   dressCode: 'Social',
 
   // música:
-  //  • se colocar um arquivo "musica.mp3" na pasta, escreva musica:'musica.mp3' (mais confiável no iPhone)
-  //  • se deixar musica:'' toca o vídeo do YouTube abaixo (apenas o áudio)
-  musica:       '',
-  youtubeId:    'SdaPHlERLVI',
+  //  • com um arquivo "musica.mp3" na pasta, escreva musica:'musica.mp3' (mais confiável no iPhone)
+  //  • com musica:'' toca o vídeo do YouTube abaixo (apenas o áudio)
+  musica:        '',
+  youtubeId:     'SdaPHlERLVI',
   youtubeInicio: 0,          // segundo em que a música começa
 
   // versículo
   versiculo:    'O amor é paciente, é bondoso. O amor tudo desculpa, tudo crê, tudo espera, tudo suporta. O amor jamais acabará!',
   versiculoRef: '1 Coríntios 13:4, 7-8',
 
-  // pais (opcional) — deixe '' para ocultar
-  paisNoiva: '',   // ex: 'Fulano da Silva<br>Fulana da Silva'
-  paisNoivo: '',
-
   // 🎁 Lista de presentes (site dos noivos)
   presentesLink: 'https://noivos.casar.com/millaebruno#/presentes',
+  // Pix (opcional) — deixe '' para ocultar
+  pixChave: '',
+  pixNome:  '',              // ex: 'Milla Souza · Banco X'
 
   // ✅ Confirmação de presença (RSVP no site dos noivos)
   rsvpLink: 'https://noivos.casar.com/millaebruno#/rsvp',
 
-  // 📱 WhatsApp dos noivos para dúvidas (opcional — apenas dígitos: 55 + DDD + número). Vazio = botão oculto.
+  // 📱 WhatsApp dos noivos para dúvidas (opcional — 55 + DDD + número). Vazio = botão oculto.
   whatsappNoivos: ''
 };
 
@@ -525,17 +419,17 @@ const CONFIG = {
    ════════════════════════════════════════════════════════════ */
 function txt(id,v){const e=document.getElementById(id);if(e)e.innerHTML=v;}
 const [noiva,noivo]=CONFIG.noivos.split(/\s*&\s*/);
-txt('heroNames','<span class="nm">'+noiva+'</span><span class="e-line"><i></i><em>e</em><i></i></span><span class="nm">'+noivo+'</span>');
+txt('heroNames',noiva+'<span class="amp">&amp;</span>'+noivo);
 txt('splashDate',CONFIG.dataCurta);
-txt('splashCity',CONFIG.cidade);
-txt('heroDate',CONFIG.dataTexto);
-txt('heroCity',CONFIG.cidade.replace(' · ',', '));
+txt('heroDate',CONFIG.dataCurta);
+txt('heroSub',CONFIG.cidade);
 txt('footerDate',CONFIG.dataCurta);
 txt('verseText','“'+CONFIG.versiculo+'”');
 txt('verseRef',CONFIG.versiculoRef);
-txt('placeTime','às '+CONFIG.hora);
-txt('placeName',CONFIG.localNome);
-txt('placeAddr',CONFIG.localEndereco);
+txt('infoDate',CONFIG.dataTexto);
+txt('tlTime',CONFIG.hora+' · Cerimônia');
+txt('tlTitle',CONFIG.localNome);
+txt('tlDesc',CONFIG.localEndereco);
 txt('dressMain',CONFIG.dressCode);
 document.getElementById('mapCerimonia').href=CONFIG.mapCerimonia;
 document.title=CONFIG.noivos+' — Casamento';
@@ -548,58 +442,38 @@ document.title=CONFIG.noivos+' — Casamento';
     action:'TEMPLATE',
     text:'Casamento '+CONFIG.noivos,
     dates:f(ini)+'/'+f(fim),
-    location:CONFIG.localNome+', '+CONFIG.localEndereco.replace(/<br>/g,', ').replace(/ — /g,' - '),
+    location:CONFIG.localNome+', '+CONFIG.localEndereco.replace(/<br>/g,', ').replace(/ · | — /g,' - '),
     details:'Cerimônia às '+CONFIG.hora+'. Recepção no mesmo local. Traje: '+CONFIG.dressCode+'.'
   });
   document.getElementById('calLink').href='https://calendar.google.com/calendar/render?'+q.toString();
 })();
 
-/* pais (opcional) */
-if(CONFIG.paisNoiva){txt('paisNoiva',CONFIG.paisNoiva);document.getElementById('paisNoivaBlock').style.display='block';}
-if(CONFIG.paisNoivo){txt('paisNoivo',CONFIG.paisNoivo);document.getElementById('paisNoivoBlock').style.display='block';}
-if(CONFIG.paisNoiva&&CONFIG.paisNoivo){document.getElementById('paisDivider').style.display='block';}
-
-/* ─── Manual do Convidado ─── */
-const ICONS = {
-  check:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M7.8 12.4l2.6 2.6L16.2 9"/></svg>',
-  church:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v3M10.5 3.5h3"/><path d="M12 5 8 8v3M12 5l4 3v3"/><path d="M5 21V11l7-3.5L19 11v10"/><path d="M9.6 21v-3.6a2.4 2.4 0 0 1 4.8 0V21"/><path d="M3 21h18"/></svg>',
-  dress:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3l2 2.4L14 3"/><path d="M10 3c-.5 1.6-.4 3 .9 4.4M14 3c.5 1.6.4 3-.9 4.4"/><path d="M10.9 7.4C10.2 9.6 8.2 15 7.2 19.7c3 1.4 6.6 1.4 9.6 0C15.8 15 13.8 9.6 13.1 7.4"/></svg>',
-  sparkle:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"><circle cx="12" cy="12" r="1.1"/><path d="M12 3.6v3M12 17.4v3M3.6 12h3M17.4 12h3M6.2 6.2l2.1 2.1M15.7 15.7l2.1 2.1M17.8 6.2l-2.1 2.1M8.3 15.7l-2.1 2.1"/></svg>',
-  cake:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v2.4"/><rect x="9" y="5.8" width="6" height="3.6" rx="1"/><rect x="6.4" y="10.4" width="11.2" height="4.4" rx="1"/><path d="M12 14.8V18M8.4 18h7.2"/><path d="M5 21h14"/></svg>',
-  vase:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 11V5.4"/><circle cx="12" cy="4.4" r="1.4"/><path d="M12 8.4c-1.9-.4-3-1.9-3-3.6M12 8.4c1.9-.4 3-1.9 3-3.6"/><path d="M8.6 12.6h6.8l-1 7.4H9.6z"/></svg>',
-  envelope:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="6" width="17" height="12" rx="1.6"/><path d="M3.8 7.2 12 12.8l8.2-5.6"/><path d="M12 16.6c1.3-1 2.1-1.8 2.1-2.8a1.05 1.05 0 0 0-2.1-.4 1.05 1.05 0 0 0-2.1.4c0 1 .8 1.8 2.1 2.8z"/></svg>',
-  clock:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13.2" r="6.8"/><path d="M12 9.6v3.6l2.4 1.4"/><path d="M4.6 5.4 7 7.6M19.4 5.4 17 7.6"/><path d="M8.6 19.6 7.2 21M15.4 19.6 16.8 21"/></svg>',
-  camera:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l1.4-2h7.2L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13" r="3.1"/></svg>',
-  couple:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"><circle cx="8.4" cy="6.6" r="2"/><path d="M5 20v-4.6a3.4 3.4 0 0 1 6.8 0V20"/><circle cx="15.6" cy="6.6" r="2"/><path d="M12.2 20v-4.6a3.4 3.4 0 0 1 6.8 0V20"/></svg>'
-};
-const MANUAL = [
-  ['check','Confirme sua presença'],
-  ['church','Participe da cerimônia'],
-  ['dress','Branco é a cor da noiva'],
-  ['sparkle','Aproveite bastante'],
-  ['cake','Aguarde a liberação da mesa de doces'],
-  ['vase','Não leve a decoração para casa'],
-  ['envelope','Convidado não convida'],
-  ['clock','Não atrase, seja pontual'],
-  ['camera','Não atrapalhe os fotógrafos'],
-  ['couple','Não saia sem se despedir dos noivos']
-];
+/* ─── Presentes (cartão) ─── */
 (function(){
-  const box=document.getElementById('manualList');
-  MANUAL.forEach(([ic,t])=>{
-    const it=document.createElement('div');it.className='mitem';
-    it.innerHTML='<span class="mi">'+ICONS[ic]+'</span><span class="mt">'+t+'</span>';
-    box.appendChild(it);
-  });
-})();
-
-/* ─── Presentes ─── */
-(function(){
-  const box=document.getElementById('giftAction');
-  const giftSvg='<svg viewBox="0 0 24 24" fill="none"><path d="M20 7H4v5h16V7zM12 7v14M12 7c-2-4-6-4-6-1.5C6 7 9 7 12 7zm0 0c2-4 6-4 6-1.5C18 7 15 7 12 7zM5 12v8a1 1 0 001 1h12a1 1 0 001-1v-8" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>';
-  box.innerHTML = CONFIG.presentesLink
-    ? '<a class="btn-fill" href="'+CONFIG.presentesLink+'" target="_blank" rel="noopener">'+giftSvg+'Lista de presentes</a>'
+  const box=document.getElementById('giftCard');
+  const giftSvg='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="8" width="18" height="13" rx="1"/><path d="M3 12h18"/><path d="M12 8v13"/><path d="M12 8c-1.7 0-3-1-3-2.5S10.3 3 12 3s3 1 3 2.5S13.7 8 12 8z"/></svg>';
+  const copySvg='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>';
+  const temPix=!!CONFIG.pixChave;
+  let h='<p class="card-text">'+(temPix
+    ? 'Se quiserem nos presentear, deixamos duas opções: nossa lista de presentes ou, se preferir, via Pix.'
+    : 'Sua presença já é o nosso maior presente. Se desejarem nos presentear e contribuir para o início desta nova história, preparamos uma lista com muito carinho.')+'</p>';
+  h+= CONFIG.presentesLink
+    ? '<a class="btn-pill" href="'+CONFIG.presentesLink+'" target="_blank" rel="noopener">'+giftSvg+'Ver lista de presentes</a>'
     : '<span class="btn-soon">Em breve</span>';
+  if(temPix){
+    h+='<div class="pix-title">Presentear com Pix</div><div class="pix-box"><div class="pix-key">'+CONFIG.pixChave+'</div>'
+     +(CONFIG.pixNome?'<div class="pix-name">'+CONFIG.pixNome+'</div>':'')
+     +'<button class="copy-btn" id="copyPix" type="button">'+copySvg+'<span>COPIAR CHAVE</span></button></div>';
+  }
+  h+='<div class="signature">'+noiva+' &amp; '+noivo+'</div>';
+  box.innerHTML=h;
+  const cb=document.getElementById('copyPix');
+  if(cb) cb.addEventListener('click',function(){
+    const lbl=this.querySelector('span');
+    const done=()=>{lbl.textContent='CHAVE COPIADA!';setTimeout(()=>lbl.textContent='COPIAR CHAVE',2200);};
+    if(navigator.clipboard) navigator.clipboard.writeText(CONFIG.pixChave).then(done,done);
+    else{const t=document.createElement('textarea');t.value=CONFIG.pixChave;document.body.appendChild(t);t.select();try{document.execCommand('copy');}catch(e){}t.remove();done();}
+  });
 })();
 
 /* ─── Confirmação de presença ─── */
@@ -608,7 +482,7 @@ const MANUAL = [
   const okIcon='<svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9.2" stroke="currentColor" stroke-width="1.5"/><path d="M8.3 12.2l2.5 2.5 4.9-5.1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   const waIcon='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.5 15.3L2 22l4.8-1.5A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.16l-.3-.18-3 .78.8-2.92-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.6-6.16c-.25-.13-1.48-.73-1.7-.81-.23-.09-.4-.13-.56.13-.17.25-.64.8-.79.97-.14.16-.29.18-.54.06-.25-.13-1.06-.39-2.02-1.25-.75-.66-1.25-1.48-1.4-1.73-.14-.25-.02-.39.11-.51.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.44-.06-.13-.56-1.36-.77-1.86-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.43 1.03 2.6.13.17 1.77 2.7 4.29 3.79.6.26 1.07.41 1.43.53.6.19 1.15.16 1.58.1.48-.07 1.48-.6 1.69-1.19.21-.58.21-1.08.14-1.19-.06-.1-.23-.16-.48-.29Z"/></svg>';
   const wa=(CONFIG.whatsappNoivos||'').replace(/\D/g,'');
-  const waMsg='Olá, Milla e Bruno! 💍 Tenho uma dúvida sobre o casamento de vocês.';
+  const waMsg='Olá, '+noiva+' e '+noivo+'! 💍 Tenho uma dúvida sobre o casamento de vocês.';
   let html = CONFIG.rsvpLink
     ? '<a class="btn-fill" href="'+CONFIG.rsvpLink+'" target="_blank" rel="noopener">'+okIcon+'Confirmar presença</a>'
     : '<span class="btn-soon">Em breve</span>';
@@ -626,7 +500,6 @@ function setPlaying(p){
   playing=p;
   document.getElementById('iconPlay').style.display=p?'none':'block';
   document.getElementById('iconPause').style.display=p?'block':'none';
-  if(p){document.getElementById('musicRow').style.display='inline-flex';musicToggle.style.display='flex';}
 }
 function musicPlay(){
   if(useYT){
@@ -704,7 +577,7 @@ function startCountdown(){
     const diff=target-new Date();
     if(diff<=0){
       clearInterval(t);
-      document.querySelector('#countdown .cd-wrap').innerHTML='<p style="font-family:\'Cormorant Garamond\',serif;font-style:italic;font-size:28px;color:var(--blue);width:100%;text-align:center">É hoje! Que Deus abençoe este dia</p>';
+      document.querySelector('#countdown .cd-wrap').innerHTML='<p style="font-family:\'Cormorant Garamond\',serif;font-style:italic;font-size:30px;color:var(--ink);width:100%;text-align:center">É hoje! Que Deus abençoe este dia</p>';
       return;
     }
     document.getElementById('cd-d').textContent=pad(Math.floor(diff/864e5));
